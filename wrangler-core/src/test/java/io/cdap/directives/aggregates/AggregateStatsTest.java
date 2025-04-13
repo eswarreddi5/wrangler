@@ -52,7 +52,7 @@ public class AggregateStatsTest {
                     case "timeUnit":
                         return (T) new Text("s");
                     case "aggregateType":
-                        return (T) new Text("total");
+                        return (T) new Text("average");
                 }
                 return null;
             }
@@ -126,8 +126,8 @@ public class AggregateStatsTest {
         Assert.assertEquals(1, result.size());
         Row out = result.get(0);
 
-        Assert.assertEquals("3670016MB", out.getValue("total_size"));
-        Assert.assertEquals("1700000000s", out.getValue("total_time"));
+        Assert.assertEquals("3670016MB", out.getValue("final_size"));
+        Assert.assertEquals("1700000000s", out.getValue("final_time"));
     }
 
     @Test
@@ -161,7 +161,7 @@ public class AggregateStatsTest {
         Assert.assertEquals(1, result.size());
         Row out = result.get(0);
 
-        Assert.assertEquals("0MB", out.getValue("total_size"));
-        Assert.assertEquals("0s", out.getValue("total_time"));
+        Assert.assertEquals("0MB", out.getValue("final_size"));
+        Assert.assertEquals("0s", out.getValue("final_time"));
     }
 }

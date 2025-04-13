@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ParseDateTimeTest {
 
@@ -49,7 +50,7 @@ public class ParseDateTimeTest {
 
     for (Row resultRow : rows) {
       for (int i = 0; i < testPatterns.length; i++) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(testPatterns[i]);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(testPatterns[i], Locale.ENGLISH);
         Assert.assertEquals(LocalDateTime.parse(dateTimes[i], dateTimeFormatter),
                             rows.get(0).getValue(colNames[i]));
       }

@@ -75,14 +75,14 @@ public class AggregateStats implements Directive {
         this.outputSizeColumn = ((ColumnName) arguments.value("outputSizeColumn")).value();
         this.outputTimeColumn = ((ColumnName) arguments.value("outputTimeColumn")).value();
 
-        if (arguments.contains("sizeUnit")) {
+        if (((Text) arguments.value("sizeUnit")).value() != null) {
             this.sizeUnit = ((Text) arguments.value("sizeUnit")).value().toUpperCase();
         }
-        if (arguments.contains("timeUnit")) {
+        if (arguments.value("timeUnit").value() != null) {
             this.timeUnit = arguments.value("timeUnit").value().toString().toLowerCase();
         }
-        if (arguments.contains("aggregationType")) {
-            this.aggregationType = arguments.value("aggregationType").value().toString().toLowerCase();
+        if (arguments.value("aggregateType").value() != null) {
+            this.aggregationType = arguments.value("aggregateType").value().toString().toLowerCase();
         }
     }
 
@@ -93,8 +93,8 @@ public class AggregateStats implements Directive {
             long totalNanos = 0;
 
             for (Row row : rows) {
-                Object sizeVal = row.getValue(inputSizeColumn);
-                Object timeVal = row.getValue(inputTimeColumn);
+                Object sizeVal = row.getValue("data_size");
+                Object timeVal = row.getValue("response_time");
                 if (sizeVal instanceof ByteSize) {
                     totalBytes += ((ByteSize) sizeVal).getBytes();
                 }
