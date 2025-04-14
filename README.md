@@ -216,3 +216,34 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
+
+
+---
+
+##  Enhancements by Chaitanya Reddy – Zeotap Assignment
+
+As part of the Software Engineer Intern assignment for Zeotap, the following enhancements were made to the Wrangler library:
+
+###  New Features
+
+####  Byte Size & Time Duration Parsers
+- Added support for parsing byte size and time duration units in transformation recipes.
+- Supports input formats such as:
+  - Byte sizes: `512B`, `10KB`, `1.5MB`, `2GB`
+  - Time durations: `500ms`, `2s`, `1min`, `3h`
+
+####  New Token Classes
+- `ByteSize.java` – Parses strings like `"1.5MB"` and converts them to bytes.
+- `TimeDuration.java` – Parses strings like `"2s"` and converts them to milliseconds.
+
+####  Grammar Enhancements
+- Updated `Directives.g4` to include `BYTE_SIZE` and `TIME_DURATION` lexer rules.
+- Grammar now supports native recognition of unit-based values.
+
+####  New Directive: `aggregate-stats`
+A new directive that aggregates total byte size and time duration across multiple rows.
+
+**Example:**
+```plaintext
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+
